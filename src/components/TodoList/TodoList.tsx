@@ -52,14 +52,12 @@ const TodoList = () => {
               disablePadding
             >
               <ListItemButton role={undefined} onClick={() => dispatch(toggleState(todo))} dense>
-                {/* TODO: onClick needed */}
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
                     checked={todo.isDone}
                     tabIndex={-1}
                     disableRipple
-                    // inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>
                 <ListItemText id={todo.text + index} primary={todo.text} />

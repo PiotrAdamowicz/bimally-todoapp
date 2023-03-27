@@ -32,14 +32,10 @@ const todosSlice = createSlice({
     },
     toggleState: (state, action: PayloadAction<Todo>) => {
       const { id } = action.payload;
+      const isEqual = (el:Todo) => el.id === id;
+      const index = state.todos.findIndex(isEqual)
 
-      state.todos.map((todo) => {
-        if (todo.id !== id && todo.isDone) {
-          state.todos[id].isDone = false;
-        } else {
-          todo.isDone = true;
-        }
-      });
+      state.todos[index].isDone = !state.todos[index].isDone; 
     },
   },
 });
