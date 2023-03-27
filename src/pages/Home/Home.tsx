@@ -8,15 +8,14 @@ import Grid from '@mui/material/Grid';
 
 const Home = () => {
   return (
-    <Container sx={{ py: 2, position: 'relative' }}>
-      <Grid container spacing={2}>
+    <Container sx={{ width: '100%', py: 2, position: 'relative' }}>
+      <Grid container spacing={12}>
         <Grid item xs={12}>
           <AddTodo />
         </Grid>
         <Grid item xs={12}>
           <TodoList />
         </Grid>
-        <Counter />
       </Grid>
     </Container>
   );
