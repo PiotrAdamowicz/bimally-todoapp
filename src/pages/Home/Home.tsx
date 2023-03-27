@@ -2,7 +2,6 @@ import React from 'react';
 
 import TodoList from '@/components/TodoList/TodoList';
 import { Container } from '@mui/material';
-import Counter from '@/components/Counter/Counter';
 import AddTodo from '@/components/todos/AddTodo';
 import Grid from '@mui/material/Grid';
 
@@ -16,7 +15,6 @@ const Home = () => {
         <Grid item xs={12}>
           <TodoList />
         </Grid>
-        <Counter />
       </Grid>
     </Container>
   );
