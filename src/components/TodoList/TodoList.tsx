@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 
 //State
-import { remove, selectTodos } from '@/slices/todosSlices';
+import { remove, selectTodos, toggleState } from '@/slices/todosSlices';
 
 //Utilities
 import { lightBlue } from '@mui/material/colors';
@@ -24,18 +24,18 @@ const TodoList = () => {
   const list = useSelector(selectTodos).todos;
   const dispatch = useDispatch();
 
-  const handleToggle = (value: number) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  // const handleToggle = (value: number) => () => {
+  //   const currentIndex = checked.indexOf(value);
+  //   const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+  //   if (currentIndex === -1) {
+  //     newChecked.push(value);
+  //   } else {
+  //     newChecked.splice(currentIndex, 1);
+  //   }
 
-    setChecked(newChecked);
-  };
+  //   setChecked(newChecked);
+  // };
 
   return (
     <Paper elevation={12}>
@@ -51,11 +51,12 @@ const TodoList = () => {
               }
               disablePadding
             >
-              <ListItemButton role={undefined} onClick={handleToggle(index)} dense>
+              <ListItemButton role={undefined} onClick={() => dispatch(toggleState(todo))} dense>
+                {/* TODO: onClick needed */}
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
-                    checked={checked.indexOf(index) !== -1}
+                    checked={todo.isDone}
                     tabIndex={-1}
                     disableRipple
                     // inputProps={{ 'aria-labelledby': labelId }}
