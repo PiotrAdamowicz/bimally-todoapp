@@ -1,9 +1,14 @@
 import React from 'react';
 import { Stack } from '@mui/material';
-import { todos } from '@/fixtures/todos';
+import { useDispatch, useSelector } from 'react-redux';
+import { remove, selectTodos } from '@/slices/todosSlices';
+import { Todo } from '@/types/todos';
+import { lightBlue } from '@mui/material/colors';
 
 const TodoList = () => {
 
+const dispatch = useDispatch();
+const list = useSelector(selectTodos).todos;
   return (
     <Stack gap={5}>
  <Stack
@@ -12,11 +17,11 @@ const TodoList = () => {
         boxShadow: 3,
         borderRadius: 5,
         position: 'relative',
-        backgroundColor: 'grey.100',
+        backgroundColor: lightBlue[900],
       }}
       gap={2}
     >
-      {todos.map((todo) =>(<li key={todo.addDate.toString()}>{todo.text}</li>))}
+      {list.todos.map((todo:Todo) =>(<li onClick={()=>dispatch(remove(todo))} key={todo.addDate + Math.random() * 100}>{todo.text}</li>))}
     </Stack>
     </Stack>
   );
