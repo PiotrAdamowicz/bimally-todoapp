@@ -6,23 +6,31 @@ import { Todo } from '@/types/todos';
 import { lightBlue } from '@mui/material/colors';
 
 const TodoList = () => {
-
-const dispatch = useDispatch();
-const list = useSelector(selectTodos).todos;
+  const dispatch = useDispatch();
+  const list = useSelector(selectTodos).todos;
   return (
     <Stack gap={5}>
- <Stack
-      sx={{
-        p: 2,
-        boxShadow: 3,
-        borderRadius: 5,
-        position: 'relative',
-        backgroundColor: lightBlue[900],
-      }}
-      gap={2}
-    >
-      {list.todos.map((todo:Todo) =>(<li onClick={()=>dispatch(remove(todo))} key={todo.addDate + Math.random() * 100}>{todo.text}</li>))}
-    </Stack>
+      <Stack
+        sx={{
+          p: 4,
+          boxShadow: 3,
+          borderRadius: 5,
+          position: 'relative',
+          backgroundColor: lightBlue[900],
+        }}
+        gap={2}
+      >
+        {list.todos.map((todo: Todo) => (
+          <li
+            onClick={() => {
+              dispatch(remove(todo));
+            }}
+            key={todo.addDate + Math.random() * 100}
+          >
+            {todo.text}
+          </li>
+        ))}
+      </Stack>
     </Stack>
   );
 };
