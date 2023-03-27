@@ -6,7 +6,7 @@ interface TodosState {
   todos: Todo[];
 }
 
-const initialState= {
+const initialState = {
   todos: [...todos], //TODO: remove after dev
 };
 
@@ -14,26 +14,27 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<Todo>) => {
-        const {text, addDate, isDone } = action.payload; 
-      state.todos.push(
-        {
-            text,
-            addDate,
-            isDone
-        }
-      )
+    add: (state, action: PayloadAction<string>) => {
+      console.log(action.payload);
+
+      state.todos.push({
+        text: action.payload,
+        addDate: new Date().toString(),
+        isDone: false,
+        id: Math.random() * 100,
+      });
     },
     remove: (state, action: PayloadAction<Todo>) => {
-        const { addDate } = action.payload; 
-      const res = state.todos.filter(todo => todo.addDate === addDate)
-      state.todos = [...res]
+      const { id } = action.payload;
+
+      const res = state.todos.filter((todo) => todo.id !== id);
+      state.todos = [...res];
     },
   },
 });
 
 export const todosReducer = todosSlice.reducer;
 
-export const selectTodos = (state: {todos:TodosState}) => state;
+export const selectTodos = (state: { todos: TodosState }) => state;
 
 export const { add, remove } = todosSlice.actions;

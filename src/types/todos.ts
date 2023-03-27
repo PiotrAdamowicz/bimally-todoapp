@@ -1,5 +1,6 @@
-export interface Todo  {
-    text:string;
-    addDate: string;
-    isDone:boolean;
+export interface Todo {
+  text: string;
+  addDate: string;
+  isDone: boolean;
+  id: number;
 }
