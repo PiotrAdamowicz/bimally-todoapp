@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 
 //State
-import { toggleEdit, remove, selectTodos, toggleState } from '@/slices/todosSlices';
+import { toggleEdit, remove, selectTodos, toggleStateById, toggleEditById } from '@/slices/todosSlices';
 
 //Utilities
 import { lightBlue } from '@mui/material/colors';
@@ -20,8 +20,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Todo } from '@/types/todos';
 import { Paper, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import AddTodo from './AddTodo';
+import Input from './Input';
 
 const TodoList = () => {
   const list = useSelector(selectTodos);
@@ -36,7 +35,7 @@ const TodoList = () => {
               key={todo.id}
               secondaryAction={
                 <Stack direction="row" spacing={1}>
-                  <IconButton onClick={() => dispatch(toggleEdit(todo))} edge="end" aria-label="comments">
+                  <IconButton onClick={() => dispatch(toggleEditById(todo.id))} edge="end" aria-label="comments">
                     <EditIcon />
                   </IconButton>
                   <IconButton onClick={() => dispatch(remove(todo))} edge="end" aria-label="comments">
@@ -46,14 +45,14 @@ const TodoList = () => {
               }
               disablePadding
             >
-              <ListItemButton role={undefined} onClick={() => dispatch(toggleState(todo))}>
+              <ListItemButton role={undefined} onClick={() => dispatch(toggleStateById(todo))}>
                 <ListItemIcon>
                   <Checkbox edge="start" checked={todo.isDone} tabIndex={-1} disableRipple />
                 </ListItemIcon>
 
                 {todo.editActive ? (
-                  <Box>
-                    <AddTodo />
+                  <Box sx={{ width: '80%' }}>
+                    <Input variant="edit" id={todo.id} label="Save" text={todo.text} />
                   </Box>
                 ) : (
                   <Box>

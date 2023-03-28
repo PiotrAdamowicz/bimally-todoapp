@@ -25,12 +25,16 @@ const StyledButton = styled(Button)({
   },
 });
 
-const AddButton = () => {
+export interface Label {
+  label: string;
+}
+
+const InputButton: React.FC<Label> = (props) => {
   return (
-    <StyledButton type="submit" variant="contained">
-      Add Task
+    <StyledButton type="submit" variant="contained" {...props}>
+      {props.label}
     </StyledButton>
   );
 };
 
-export default AddButton;
+export default InputButton;

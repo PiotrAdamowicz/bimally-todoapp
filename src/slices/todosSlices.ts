@@ -10,31 +10,51 @@ const initialState = {
   todos: [...todos], //TODO: remove after dev
 };
 
+export interface updateProps {
+  value: string;
+  id: number;
+}
+
 const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<Todo>) => {
+    add: (state, action: PayloadAction<string>) => {
+      const id = Math.random() * 100;
       state.todos.push({
-        text: action.payload.text,
-        addDate: new Date(),
+        text: action.payload,
+        addDate: new Date().toString(),
         isDone: false,
-        id: Math.random() * 100,
-        editActive: action.payload.editActive,
+        id,
+        editActive: false,
       });
     },
+
     remove: (state, action: PayloadAction<Todo>) => {
       const { id } = action.payload;
 
       const res = state.todos.filter((todo) => todo.id !== id);
       state.todos = [...res];
     },
-    toggleState: (state, action: PayloadAction<Todo>) => {
+    update: (state, action: PayloadAction<updateProps>) => {
+      const isEqual = (el: Todo): boolean => el.id === action.payload.id;
+      const id = state.todos.findIndex(isEqual);
+      console.log(id);
+      state.todos[id].text = state.todos[id].text + action.payload.value;
+    },
+    toggleStateById: (state, action: PayloadAction<Todo>) => {
       const { id } = action.payload;
       const isEqual = (el: Todo): boolean => el.id === id;
       const index = state.todos.findIndex(isEqual);
 
       state.todos[index].isDone = !state.todos[index].isDone;
+    },
+    toggleEditById: (state, action: PayloadAction<number>) => {
+      const id = action.payload;
+      const isEqual = (el: Todo): boolean => el.id === id;
+      const index = state.todos.findIndex(isEqual);
+
+      state.todos[index].editActive = !state.todos[index].editActive;
     },
     toggleEdit: (state, action: PayloadAction<Todo>) => {
       const { id } = action.payload;
@@ -50,4 +70,4 @@ export const todosReducer = todosSlice.reducer;
 
 export const selectTodos = (state: TodosState) => state.todos;
 
-export const { add, remove, toggleState, toggleEdit } = todosSlice.actions;
+export const { add, remove, toggleStateById, toggleEditById, toggleEdit, update } = todosSlice.actions;

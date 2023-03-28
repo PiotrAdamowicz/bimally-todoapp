@@ -1,6 +1,6 @@
 export interface Todo {
   text: string;
-  addDate: Date;
+  addDate: Date | string;
   isDone: boolean;
   id: number;
   editActive: boolean;

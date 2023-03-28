@@ -2,26 +2,41 @@ import React from 'react';
 
 //State & Validation
 import { useDispatch } from 'react-redux';
-import { add } from '@/slices/todosSlices';
+import { add, toggleEditById, update } from '@/slices/todosSlices';
 import { Validate, ValidationGroup } from 'mui-validate';
 
 //Componets
 import Box from '@mui/material/Box';
 import { InputAdornment, OutlinedInput } from '@mui/material';
-import AddButton from '@/components/todos/AddButton';
+import InputButton from '../utils/InputButton';
 
-const AddTodo = () => {
-  const [value, setValue] = React.useState('');
+export interface AddTodoProps {
+  label: string;
+  text: string;
+  variant: 'edit' | undefined;
+  id: number;
+}
+
+const Input: React.FC<AddTodoProps> = ({ label, text, variant, id }) => {
+  const [value, setValue] = React.useState(text);
   const dispatch = useDispatch();
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (variant === 'edit') {
+      dispatch(toggleEditById(id));
+      dispatch(update({ value, id }));
+      return;
+    }
+    dispatch(add(value));
+    console.log(event.target);
+    setValue('');
+  };
 
   return (
     <Box
       component="form"
-      onSubmit={(event) => {
-        event.preventDefault();
-        dispatch(add(value));
-        setValue('');
-      }}
+      onSubmit={handleSubmit}
       sx={{
         '& .MuiTextField-root': { m: 2, ml: 0, width: '100%' },
       }}
@@ -36,7 +51,7 @@ const AddTodo = () => {
               value={value}
               endAdornment={
                 <InputAdornment position="end">
-                  <AddButton />
+                  <InputButton label={label ? label : 'Button'} />
                 </InputAdornment>
               }
             />
@@ -47,4 +62,4 @@ const AddTodo = () => {
   );
 };
 
-export default AddTodo;
+export default Input;
