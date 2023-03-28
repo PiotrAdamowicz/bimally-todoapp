@@ -1,8 +1,7 @@
 import React from 'react';
 
-import TodoList from '@/components/TodoList/TodoList';
+import TodoList from '@/components/todos/TodoList';
 import { Container } from '@mui/material';
-import Counter from '@/components/Counter/Counter';
 import AddTodo from '@/components/todos/AddTodo';
 import Grid from '@mui/material/Grid';
 
