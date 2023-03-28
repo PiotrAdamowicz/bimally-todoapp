@@ -17,7 +17,7 @@ import { remove, selectTodos, toggleState } from '@/slices/todosSlices';
 import { lightBlue } from '@mui/material/colors';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Todo } from '@/types/todos';
-import { ListSubheader, Paper, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 
 const TodoList = () => {
   const list = useSelector(selectTodos).todos;
