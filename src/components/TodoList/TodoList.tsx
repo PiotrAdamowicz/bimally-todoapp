@@ -17,25 +17,11 @@ import { remove, selectTodos, toggleState } from '@/slices/todosSlices';
 import { lightBlue } from '@mui/material/colors';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Todo } from '@/types/todos';
-import { Paper } from '@mui/material';
+import { ListSubheader, Paper, Typography } from '@mui/material';
 
 const TodoList = () => {
-  const [checked, setChecked] = React.useState([0]);
   const list = useSelector(selectTodos).todos;
   const dispatch = useDispatch();
-
-  // const handleToggle = (value: number) => () => {
-  //   const currentIndex = checked.indexOf(value);
-  //   const newChecked = [...checked];
-
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-
-  //   setChecked(newChecked);
-  // };
 
   return (
     <Paper elevation={12}>
@@ -51,16 +37,16 @@ const TodoList = () => {
               }
               disablePadding
             >
-              <ListItemButton role={undefined} onClick={() => dispatch(toggleState(todo))} dense>
+              <ListItemButton role={undefined} onClick={() => dispatch(toggleState(todo))}>
                 <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={todo.isDone}
-                    tabIndex={-1}
-                    disableRipple
-                  />
+                  <Checkbox edge="start" checked={todo.isDone} tabIndex={-1} disableRipple />
                 </ListItemIcon>
-                <ListItemText id={todo.text + index} primary={todo.text} />
+                <Box>
+                  <ListItemText id={todo.text + index} primary={todo.text} />
+                  <Typography variant="caption" sx={{ opacity: 0.8 }}>
+                    {`${todo.addDate}`}
+                  </Typography>
+                </Box>
               </ListItemButton>
             </ListItem>
           ))}
