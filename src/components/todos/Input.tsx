@@ -12,12 +12,12 @@ import InputButton from '../utils/InputButton';
 
 export interface AddTodoProps {
   label: string;
-  text: string;
-  variant: 'edit' | undefined;
-  id: number;
+  text?: string;
+  variant?: 'edit' | undefined;
+  id?: number;
 }
 
-const Input: React.FC<AddTodoProps> = ({ label, text, variant, id }) => {
+const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id }) => {
   const [value, setValue] = React.useState(text);
   const dispatch = useDispatch();
 

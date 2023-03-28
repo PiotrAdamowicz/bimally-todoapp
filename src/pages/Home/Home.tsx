@@ -8,7 +8,7 @@ import Input from '@/components/todos/Input';
 const Home = () => {
   return (
     <Container sx={{ width: '100%', py: 2, position: 'relative' }}>
-      <Grid container spacing={12}>
+      <Grid container spacing={2} rowSpacing={4}>
         <Grid item xs={12}>
           <Input label="Add task" />
         </Grid>

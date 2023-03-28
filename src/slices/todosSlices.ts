@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Todo } from '@/types/todos';
 import { todos } from '@/fixtures/todos';
+import { DateFormatter } from '@/helpers/date';
 
 interface TodosState {
   todos: Todo[];
@@ -12,7 +13,7 @@ const initialState = {
 
 export interface updateProps {
   value: string;
-  id: number;
+  id?: number;
 }
 
 const todosSlice = createSlice({
@@ -23,7 +24,7 @@ const todosSlice = createSlice({
       const id = Math.random() * 100;
       state.todos.push({
         text: action.payload,
-        addDate: new Date().toString(),
+        addDate: DateFormatter(),
         isDone: false,
         id,
         editActive: false,
@@ -49,7 +50,7 @@ const todosSlice = createSlice({
 
       state.todos[index].isDone = !state.todos[index].isDone;
     },
-    toggleEditById: (state, action: PayloadAction<number>) => {
+    toggleEditById: (state, action: PayloadAction<number | undefined>) => {
       const id = action.payload;
       const isEqual = (el: Todo): boolean => el.id === id;
       const index = state.todos.findIndex(isEqual);
