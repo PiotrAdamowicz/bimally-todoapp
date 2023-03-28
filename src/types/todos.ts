@@ -3,4 +3,5 @@ export interface Todo {
   addDate: Date;
   isDone: boolean;
   id: number;
+  editActive: boolean;
 }
