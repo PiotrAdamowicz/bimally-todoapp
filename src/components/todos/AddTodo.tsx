@@ -7,7 +7,8 @@ import { Validate, ValidationGroup } from 'mui-validate';
 
 //Componets
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import { InputAdornment, OutlinedInput } from '@mui/material';
+import AddButton from '@/components/todos/AddButton';
 
 const AddTodo = () => {
   const [value, setValue] = React.useState('');
@@ -27,9 +28,20 @@ const AddTodo = () => {
       autoComplete="off"
     >
       <ValidationGroup>
-        <Validate name="addTask" required={[true, 'Task must not be empty']}>
-          <TextField onChange={(event) => setValue(event.target.value)} fullWidth value={value} />
-        </Validate>
+        <>
+          <Validate name="addTask" required={[true, 'Task must not be empty']}>
+            <OutlinedInput
+              onChange={(event) => setValue(event.target.value)}
+              fullWidth
+              value={value}
+              endAdornment={
+                <InputAdornment position="end">
+                  <AddButton />
+                </InputAdornment>
+              }
+            />
+          </Validate>
+        </>
       </ValidationGroup>
     </Box>
   );
