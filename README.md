@@ -1,4 +1,4 @@
-1. Edit button
+1. _Edit button_
 2. _AddTask button_
 3. Optional: filtering
 4. RWD
