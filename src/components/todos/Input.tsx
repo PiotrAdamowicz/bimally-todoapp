@@ -49,6 +49,7 @@ const Input: React.FC<AddTodoProps> = ({ label, text, variant, id }) => {
               onChange={(event) => setValue(event.target.value)}
               fullWidth
               value={value}
+              autoFocus
               endAdornment={
                 <InputAdornment position="end">
                   <InputButton label={label ? label : 'Button'} />
