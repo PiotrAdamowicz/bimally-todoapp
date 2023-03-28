@@ -11,12 +11,15 @@ import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 
 //State
-import { toggleEdit, remove, selectTodos, toggleStateById, toggleEditById } from '@/slices/todosSlices';
+import { remove, selectTodos, toggleStateById, toggleEditById } from '@/slices/todosSlices';
+
+//Icons
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 //Utilities
 import { lightBlue } from '@mui/material/colors';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import EditIcon from '@mui/icons-material/Edit';
 import { Todo } from '@/types/todos';
 import { Paper, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -29,7 +32,7 @@ const TodoList = () => {
   return (
     <Paper elevation={12}>
       <Box sx={{ width: '100%' }}>
-        <List sx={{ p: 2, width: '100%', bgcolor: lightBlue[900] }}>
+        <List sx={{ p: 0, width: '100%', bgcolor: lightBlue[900] }} dense>
           {list.todos.map((todo: Todo, index: number) => (
             <ListItem
               key={todo.id}
@@ -46,13 +49,20 @@ const TodoList = () => {
               disablePadding
             >
               <ListItemButton role={undefined} onClick={() => dispatch(toggleStateById(todo))}>
-                <ListItemIcon>
-                  <Checkbox edge="start" checked={todo.isDone} tabIndex={-1} disableRipple />
+                <ListItemIcon sx={{ minWidth: '30px' }}>
+                  <Checkbox
+                    sx={{ m: 0, p: 0 }}
+                    edge="start"
+                    size="small"
+                    checked={todo.isDone}
+                    tabIndex={-1}
+                    disableRipple
+                  />
                 </ListItemIcon>
 
                 {todo.editActive ? (
-                  <Box sx={{ width: '80%' }}>
-                    <Input variant="edit" id={todo.id} label="Save" text={todo.text} />
+                  <Box sx={{ width: '72%' }}>
+                    <Input edit variant="edit" id={todo.id} label={<SaveAltIcon />} text={todo.text} />
                   </Box>
                 ) : (
                   <Box>

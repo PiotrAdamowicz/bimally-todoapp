@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { green } from '@mui/material/colors';
 
-const StyledButton = styled(Button)({
+const StyledButton = styled(Button)(({ theme }) => ({
   boxShadow: 'none',
   textTransform: 'none',
   fontSize: 16,
@@ -23,15 +23,29 @@ const StyledButton = styled(Button)({
     borderColor: green[300],
     boxShadow: 'none',
   },
-});
+}));
 
 export interface Label {
-  label: string;
+  label: string | React.ReactNode;
+  edit: boolean | undefined;
 }
 
 const InputButton: React.FC<Label> = (props) => {
   return (
-    <StyledButton type="submit" variant="contained" {...props}>
+    <StyledButton
+      sx={
+        props.edit
+          ? {
+              backgroundColor: 'transparent',
+              border: 0,
+              color: 'white',
+            }
+          : undefined
+      }
+      type="submit"
+      variant="contained"
+      {...props}
+    >
       {props.label}
     </StyledButton>
   );

@@ -3,5 +3,6 @@
 3. Optional: filtering
 4. RWD
 5. Optional: Validation (fix needed)
+6. 'No tasks' Screen needed
 
-6. Publish!!
+- Publish!!

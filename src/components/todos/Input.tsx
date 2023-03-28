@@ -11,13 +11,14 @@ import { InputAdornment, OutlinedInput } from '@mui/material';
 import InputButton from '../utils/InputButton';
 
 export interface AddTodoProps {
-  label: string;
+  label: string | React.ReactNode;
   text?: string;
   variant?: 'edit' | undefined;
   id?: number;
+  edit: boolean | undefined;
 }
 
-const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id }) => {
+const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id, edit }) => {
   const [value, setValue] = React.useState(text);
   const dispatch = useDispatch();
 
@@ -52,7 +53,7 @@ const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id }) => {
               autoFocus
               endAdornment={
                 <InputAdornment position="end">
-                  <InputButton label={label ? label : 'Button'} />
+                  <InputButton edit={edit} label={label ? label : 'Button'} />
                 </InputAdornment>
               }
             />
