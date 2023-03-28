@@ -21,6 +21,7 @@ import { Todo } from '@/types/todos';
 import { Paper, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import AddTodo from './AddTodo';
 
 const TodoList = () => {
   const list = useSelector(selectTodos);
@@ -49,16 +50,19 @@ const TodoList = () => {
                 <ListItemIcon>
                   <Checkbox edge="start" checked={todo.isDone} tabIndex={-1} disableRipple />
                 </ListItemIcon>
-                <Box>
-                  <ListItemText id={todo.text + index} primary={todo.text} />
-                  {todo.editActive ? (
-                    <TextField />
-                  ) : (
+
+                {todo.editActive ? (
+                  <Box>
+                    <AddTodo />
+                  </Box>
+                ) : (
+                  <Box>
+                    <ListItemText id={todo.text + index} primary={todo.text} />
                     <Typography variant="caption" sx={{ opacity: 0.8 }}>
                       {`${todo.addDate}`}
                     </Typography>
-                  )}
-                </Box>
+                  </Box>
+                )}
               </ListItemButton>
             </ListItem>
           ))}
