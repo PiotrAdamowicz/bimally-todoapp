@@ -40,7 +40,7 @@ const todosSlice = createSlice({
       const isEqual = (el: Todo): boolean => el.id === action.payload.id;
       const id = state.todos.findIndex(isEqual);
       console.log(id);
-      state.todos[id].text = state.todos[id].text + action.payload.value;
+      state.todos[id].text = action.payload.value;
     },
     toggleStateById: (state, action: PayloadAction<Todo>) => {
       const { id } = action.payload;
