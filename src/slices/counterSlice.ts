@@ -5,12 +5,10 @@ interface CounterState {
   count: number;
 }
 
-// Define the initial state for the slice
 const initialState: CounterState = {
   count: 0,
 };
 
-// Create the slice
 const counterSlice = createSlice({
   name: 'counter',
   initialState,
@@ -24,10 +22,8 @@ const counterSlice = createSlice({
   },
 });
 
-// Extract the reducer function from the slice
 export const counterReducer = counterSlice.reducer;
 
 export const selectCount = (state: RootState) => state.counter.count;
 
-// Extract action creators from the slice
 export const { increment, decrement } = counterSlice.actions;
