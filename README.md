@@ -1,6 +1,6 @@
 # Basic Todo App
 
-Simple Todo App made for recruitment in BimAlly
+Simple todo app made for recruitment in BimAlly
 
 ## Summary
 
