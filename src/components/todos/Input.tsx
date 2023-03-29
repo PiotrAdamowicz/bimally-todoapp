@@ -3,7 +3,7 @@ import React from 'react';
 //State & Validation
 import { useDispatch } from 'react-redux';
 import { add, toggleEditById, update } from '@/slices/todosSlices';
-import { Validate, ValidationGroup } from 'mui-validate';
+import { useValidation, Validate, ValidationGroup } from 'mui-validate';
 
 //Componets
 import Box from '@mui/material/Box';
@@ -20,9 +20,15 @@ export interface AddTodoProps {
 const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id }) => {
   const [value, setValue] = React.useState(text);
   const dispatch = useDispatch();
+  const { validations, setValidations } = useValidation();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (value === '') {
+      setValidations(validations);
+      return;
+    }
+
     if (variant === 'edit') {
       dispatch(toggleEditById(id));
       dispatch(update({ value, id }));
@@ -43,7 +49,7 @@ const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id }) => {
     >
       <ValidationGroup>
         <>
-          <Validate name="addTask" required={[true, 'Task must not be empty']}>
+          <Validate name={`addTask-${label}`} required={variant ? true : false}>
             <OutlinedInput
               sx={{ fontSize: 15 }}
               onChange={(event) => setValue(event.target.value)}

@@ -2,7 +2,7 @@
 2. _AddTask button_
 3. Optional: filtering
 4. _RWD_
-5. Optional: Validation (fix needed)
-6. 'No tasks' Screen needed
+5. _Optional: Validation_
+6. _'No tasks' Screen needed_
 
-- Publish!!
+- _Publish-8v.1_
