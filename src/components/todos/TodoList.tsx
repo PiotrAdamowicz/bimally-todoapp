@@ -26,64 +26,69 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { lightBlue } from '@mui/material/colors';
 import { Todo } from '@/types/todos';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import EmptyList from './EmptyList';
 
 const TodoList = () => {
-  const list = useSelector(selectTodos);
+  const list = useSelector(selectTodos).todos;
   const dispatch = useDispatch();
 
   const matches = useMediaQuery('(max-width:600px)');
 
-  return (
-    <Paper elevation={12}>
-      <Box sx={{ width: '100%' }}>
-        <List sx={{ p: 0, width: '100%', bgcolor: lightBlue[900] }} dense={matches ? true : false}>
-          {list.todos.map((todo: Todo, index: number) => (
-            <ListItem
-              key={todo.id}
-              secondaryAction={
-                <Stack direction="row" spacing={1}>
-                  <IconButton onClick={() => dispatch(toggleEditById(todo.id))} edge="end" aria-label="comments">
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton onClick={() => dispatch(remove(todo))} edge="end" aria-label="comments">
-                    <DeleteForeverIcon />
-                  </IconButton>
-                </Stack>
-              }
-              disablePadding
-            >
-              <ListItemButton role={undefined}>
-                <ListItemIcon sx={{ minWidth: '30px' }}>
-                  <Checkbox
-                    sx={matches ? { m: 0 } : { m: 3, p: 0 }}
-                    edge="start"
-                    size="small"
-                    checked={todo.isDone}
-                    tabIndex={-1}
-                    disableRipple
-                    onClick={() => dispatch(toggleStateById(todo))}
-                  />
-                </ListItemIcon>
+  if (list.todos.length >= 0) {
+    return (
+      <Paper elevation={12}>
+        <Box sx={{ width: '100%' }}>
+          <List sx={{ p: 0, width: '100%', bgcolor: lightBlue[900] }} dense={matches ? true : false}>
+            {list.todos.map((todo: Todo, index: number) => (
+              <ListItem
+                key={todo.id}
+                secondaryAction={
+                  <Stack direction="row" spacing={1}>
+                    <IconButton onClick={() => dispatch(toggleEditById(todo.id))} edge="end" aria-label="comments">
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => dispatch(remove(todo))} edge="end" aria-label="comments">
+                      <DeleteForeverIcon />
+                    </IconButton>
+                  </Stack>
+                }
+                disablePadding
+              >
+                <ListItemButton role={undefined}>
+                  <ListItemIcon sx={{ minWidth: '30px' }}>
+                    <Checkbox
+                      sx={matches ? { m: 0 } : { m: 3, p: 0 }}
+                      edge="start"
+                      size="small"
+                      checked={todo.isDone}
+                      tabIndex={-1}
+                      disableRipple
+                      onClick={() => dispatch(toggleStateById(todo))}
+                    />
+                  </ListItemIcon>
 
-                {todo.editActive ? (
-                  <Box sx={{ width: '70%' }}>
-                    <Input variant="edit" id={todo.id} label={<SaveAltIcon />} text={todo.text} />
-                  </Box>
-                ) : (
-                  <Box>
-                    <ListItemText id={todo.text + index} primary={todo.text} />
-                    <Typography variant="caption" sx={{ opacity: 0.8 }}>
-                      {`${todo.addDate}`}
-                    </Typography>
-                  </Box>
-                )}
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-    </Paper>
-  );
+                  {todo.editActive ? (
+                    <Box sx={{ width: '70%' }}>
+                      <Input variant="edit" id={todo.id} label={<SaveAltIcon />} text={todo.text} />
+                    </Box>
+                  ) : (
+                    <Box>
+                      <ListItemText id={todo.text + index} primary={todo.text} />
+                      <Typography variant="caption" sx={{ opacity: 0.8 }}>
+                        {`${todo.addDate}`}
+                      </Typography>
+                    </Box>
+                  )}
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Paper>
+    );
+  } else {
+    <EmptyList />;
+  }
 };
 
 export default TodoList;

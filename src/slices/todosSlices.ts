@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Todo } from '@/types/todos';
-import { todos } from '@/fixtures/todos';
 import { DateFormatter } from '@/helpers/date';
 
 interface TodosState {
   todos: Todo[];
 }
 
-const initialState = {
-  todos: [...todos], //TODO: remove after dev
+const initialState: TodosState = {
+  todos: [],
 };
 
 export interface updateProps {
@@ -69,6 +68,6 @@ const todosSlice = createSlice({
 
 export const todosReducer = todosSlice.reducer;
 
-export const selectTodos = (state: TodosState) => state.todos;
+export const selectTodos = (state: TodosState) => state;
 
 export const { add, remove, toggleStateById, toggleEditById, toggleEdit, update } = todosSlice.actions;
