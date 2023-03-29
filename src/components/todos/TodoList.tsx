@@ -29,19 +29,20 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import EmptyList from './EmptyList';
 
 const TodoList = () => {
-  const list = useSelector(selectTodos).todos;
+  //@ts-ignore
+  const list = useSelector(selectTodos).todos.todos;
   const dispatch = useDispatch();
 
   const matches = useMediaQuery('(max-width:600px)');
 
-  if (list.todos.length <= 0) {
+  if (list.length <= 0) {
     return <EmptyList />;
   } else {
     return (
       <Paper elevation={12}>
         <Box sx={{ width: '100%' }}>
           <List sx={{ p: 0, width: '100%', bgcolor: lightBlue[900] }} dense={matches ? true : false}>
-            {list.todos.map((todo: Todo, index: number) => (
+            {list.map((todo: Todo, index: number) => (
               <ListItem
                 key={todo.id}
                 secondaryAction={
