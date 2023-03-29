@@ -24,7 +24,7 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 //Utilities
 import { lightBlue } from '@mui/material/colors';
-import { Todo } from '@/types/todos';
+import { Todo } from '@/types/todo';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import EmptyList from './EmptyList';
 

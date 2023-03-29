@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Todo } from '@/types/todos';
+import { Todo } from '@/types/todo';
 import { DateFormatter } from '@/helpers/date';
 
 interface TodosState {
