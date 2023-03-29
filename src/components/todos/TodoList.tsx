@@ -34,7 +34,9 @@ const TodoList = () => {
 
   const matches = useMediaQuery('(max-width:600px)');
 
-  if (list.todos.length >= 0) {
+  if (list.todos.length <= 0) {
+    return <EmptyList />;
+  } else {
     return (
       <Paper elevation={12}>
         <Box sx={{ width: '100%' }}>
@@ -86,8 +88,6 @@ const TodoList = () => {
         </Box>
       </Paper>
     );
-  } else {
-    <EmptyList />;
   }
 };
 

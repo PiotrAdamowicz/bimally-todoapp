@@ -1,9 +1,14 @@
 import React from 'react';
 
-import { Typography } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const EmptyList = () => {
-  return <Typography variant="h1">No tasks added</Typography>;
+  return (
+    <Stack justifyContent="center" alignItems="baseline" direction="row" sx={{ width: '100%' }} spacing={2}>
+      <Alert severity="info">No tasks added</Alert>
+    </Stack>
+  );
 };
 
 export default EmptyList;

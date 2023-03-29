@@ -29,7 +29,6 @@ const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id }) => {
       return;
     }
     dispatch(add(value));
-    console.log(event.target);
     setValue('');
   };
 
