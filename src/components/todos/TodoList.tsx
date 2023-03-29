@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+//Components
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -9,8 +9,12 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Input from './Input';
+import { Paper, Typography } from '@mui/material';
 
 //State
+import { useDispatch, useSelector } from 'react-redux';
 import { remove, selectTodos, toggleStateById, toggleEditById } from '@/slices/todosSlices';
 
 //Icons
@@ -21,9 +25,6 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 //Utilities
 import { lightBlue } from '@mui/material/colors';
 import { Todo } from '@/types/todos';
-import { Paper, Typography } from '@mui/material';
-import Stack from '@mui/material/Stack';
-import Input from './Input';
 
 const TodoList = () => {
   const list = useSelector(selectTodos);
@@ -62,7 +63,7 @@ const TodoList = () => {
                 </ListItemIcon>
 
                 {todo.editActive ? (
-                  <Box sx={{ width: '72%' }}>
+                  <Box sx={{ width: '70%' }}>
                     <Input edit variant="edit" id={todo.id} label={<SaveAltIcon />} text={todo.text} />
                   </Box>
                 ) : (

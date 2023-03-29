@@ -19,9 +19,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
   borderWidth: '4px',
   fontWeight: 'bold',
   '&:hover': {
-    backgroundColor: green[400],
-    borderColor: green[300],
     boxShadow: 'none',
+    backgroundColor: green[400],
+    borderColor: green[400],
+    boxShadowColor: green[300],
   },
 }));
 
@@ -39,6 +40,12 @@ const InputButton: React.FC<Label> = (props) => {
               backgroundColor: 'transparent',
               border: 0,
               color: 'white',
+              minWidth: '20px',
+              m: 0,
+              px: 1,
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
             }
           : undefined
       }

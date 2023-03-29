@@ -47,6 +47,7 @@ const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id, edit }) 
         <>
           <Validate name="addTask" required={[true, 'Task must not be empty']}>
             <OutlinedInput
+              sx={{ fontSize: 15 }}
               onChange={(event) => setValue(event.target.value)}
               fullWidth
               value={value}
