@@ -48,7 +48,7 @@ const TodoList = () => {
               }
               disablePadding
             >
-              <ListItemButton role={undefined} onClick={() => dispatch(toggleStateById(todo))}>
+              <ListItemButton role={undefined}>
                 <ListItemIcon sx={{ minWidth: '30px' }}>
                   <Checkbox
                     sx={{ m: 0, p: 0 }}
@@ -57,6 +57,7 @@ const TodoList = () => {
                     checked={todo.isDone}
                     tabIndex={-1}
                     disableRipple
+                    onClick={() => dispatch(toggleStateById(todo))}
                   />
                 </ListItemIcon>
 
