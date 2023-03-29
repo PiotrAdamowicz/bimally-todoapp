@@ -13,12 +13,11 @@ import InputButton from '../utils/InputButton';
 export interface AddTodoProps {
   label: string | React.ReactNode;
   text?: string;
-  variant?: 'edit' | undefined;
+  variant?: 'edit';
   id?: number;
-  edit: boolean | undefined;
 }
 
-const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id, edit }) => {
+const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id }) => {
   const [value, setValue] = React.useState(text);
   const dispatch = useDispatch();
 
@@ -54,7 +53,7 @@ const Input: React.FC<AddTodoProps> = ({ label, text = '', variant, id, edit }) 
               autoFocus
               endAdornment={
                 <InputAdornment position="end">
-                  <InputButton edit={edit} label={label ? label : 'Button'} />
+                  <InputButton edit={variant} label={label ? label : 'Button'} />
                 </InputAdornment>
               }
             />

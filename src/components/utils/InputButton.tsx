@@ -28,7 +28,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 export interface Label {
   label: string | React.ReactNode;
-  edit: boolean | undefined;
+  edit?: boolean | string;
 }
 
 const InputButton: React.FC<Label> = (props) => {
